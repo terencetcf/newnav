@@ -1,0 +1,225 @@
+.sidenav {
+  background-color: #526061;
+  color: #fff;
+  width: 50px;
+  transition: all 0.1s;
+  position: relative;
+  padding-right: 0;
+  border-right: solid 4px #4cbe82;
+
+  &-content {
+    display: none;
+
+    .show & {
+      display: block;
+    }
+  }
+
+  &.show {
+    width: 270px;
+    max-width: 270px;
+  }
+
+  &-toggle {
+    position: absolute;
+    top: 5px;
+    right: -15px;
+    background-color: #4cbe82;
+    border: solid 4px #4cbe82;
+    border-radius: 0.25rem;
+
+    button {
+      display: inline-block;
+      color: #fff;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.2rem 0.75rem;
+      border-radius: 0.25rem;
+      background-color: #004431;
+      line-height: 1.75;
+      cursor: pointer;
+    }
+  }
+
+  a {
+    color: #fff;
+  }
+
+  &-vertical {
+    display: block;
+    background-color: #4cbe80;
+    height: 100%;
+    writing-mode: vertical-lr;
+    text-orientation: sideways-right;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+    padding-top: 100px;
+    padding-left: 5px;
+    color: #024231;
+
+    .show & {
+      display: none;
+    }
+  }
+
+  &-menu {
+    padding: 10px 0;
+
+    a {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      padding: 0.8em 0.75em;
+      display: block;
+
+      &.active {
+        background-color: #006a4c;
+      }
+
+      &:hover {
+        color: #fff;
+        background-color: #394344;
+      }
+    }
+
+    li,
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li ul {
+      padding-left: 0;
+
+      a {
+        background-color: #a9b3b5;
+        color: #000;
+        text-transform: none;
+
+        &:hover {
+          background-color: #979fa2;
+          color: #000;
+        }
+      }
+    }
+
+    .tag {
+      color: #fff;
+      background-color: #df1f1c;
+      border-radius: 0.25rem;
+      padding: 2px 4px;
+      position: absolute;
+      right: 50px;
+    }
+  }
+}
+
+.site-select {
+  background-color: #4cbe82;
+  padding: 8px;
+
+  .dropdown {
+    width: 90%;
+  }
+}
+
+.dropdown {
+  position: relative;
+
+  &-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    width: 100%;
+    font-weight: 700;
+    color: #195c4b;
+    text-align: left;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #fff;
+    padding: 0.3rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: 0.25rem;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+
+    &::after {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 0.3em;
+      vertical-align: middle;
+      content: "";
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-left: 0.3em solid transparent;
+    }
+  }
+
+  &-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    width: 100%;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    will-change: transform;
+    transform: translate3d(0, 1.5rem, 0);
+    max-height: 200px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+
+      &-track {
+        border-radius: 0 0 0.25rem 0;
+        background-color: #fff;
+      }
+
+      &-thumb {
+        background: #006a4c;
+      }
+    }
+  }
+
+  &.show &-menu {
+    display: block;
+  }
+
+  &-item,
+  a#{&}-item {
+    color: #195c4b;
+    display: block;
+    padding: 0.3rem 0.75rem;
+    background-color: transparent;
+    border: 0;
+
+    &.active {
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    &:hover {
+      color: #fff;
+      background-color: #006a4c;
+    }
+  }
+}
