@@ -198,7 +198,7 @@
 
   .dropdown {
     width: 90%;
-    width: calc(100% - 55px);
+    width: calc(100% - 30px);
   }
 }
 
@@ -317,6 +317,10 @@
       border-bottom: solid 4px #4cbe82;
       padding: 16px;
       background-color: #006a4c;
+
+      .dropdown {
+        width: calc(100% - 55px);
+      }
     }
 
     &-menu a.active::after {
