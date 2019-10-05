@@ -125,7 +125,7 @@ const App: React.FC = () => {
                   </a>
                   <ul>
                     <li>
-                      <a href="#" className="active">
+                      <a href="#">
                         Risk Register <span className="badge">3</span>
                       </a>
                     </li>
@@ -142,9 +142,11 @@ const App: React.FC = () => {
               </ul>
             </div>
           </div>
-          <div className="sidenav-vertical">Allen, Dallas</div>
+          <div className="sidenav-vertical">{getSiteName()}</div>
         </div>
-        <div className="main">s</div>
+        <div className="main">
+          <h1>{getSiteName()}</h1>
+        </div>
       </div>
     </>
   );

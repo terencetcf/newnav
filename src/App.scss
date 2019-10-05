@@ -1,7 +1,7 @@
 .sidenav {
   background-color: #526061;
   color: #fff;
-  width: 25px;
+  width: 28px;
   transition: all 0.1s;
   position: relative;
   padding-right: 0;
@@ -18,24 +18,12 @@
   &.show {
     width: 270px;
     max-width: 270px;
-
-    .bar:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 5px);
-    }
-
-    .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .bar:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -5px);
-    }
   }
 
   &-toggle {
     position: absolute;
-    top: 5px;
-    right: -18px;
+    top: 4px;
+    right: -20px;
     background-color: #4cbe82;
     border: solid 3px #4cbe82;
     border-radius: 0.25rem;
@@ -52,6 +40,8 @@
       background-color: #004431;
       line-height: 1.75;
       cursor: pointer;
+      outline: none;
+      padding: 3px 8px;
     }
 
     .bar {
@@ -169,8 +159,8 @@
       position: absolute;
       width: 10px;
       height: 10px;
-      top: 50%;
       right: 20px;
+      top: 50%;
       transform: translate(0, -50%);
       transition: all 0.1s;
     }
@@ -226,7 +216,7 @@
     vertical-align: middle;
     background-color: #fff;
     border: 1px solid #fff;
-    padding: 0.3rem 0.75rem;
+    padding: 8px 15px;
     font-size: 0.9rem;
     line-height: 1.25;
     border-radius: 0.25rem;
@@ -304,6 +294,52 @@
     &:hover {
       color: #fff;
       background-color: #006a4c;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sidenav {
+    position: absolute;
+    top: 0;
+    border-right: none;
+    width: 100%;
+
+    &-toggle {
+      top: 17px;
+      right: 17px;
+      border: none;
+    }
+
+    .site-select {
+      border-bottom: solid 4px #4cbe82;
+      padding: 16px;
+      background-color: #006a4c;
+    }
+
+    &-menu a.active::after {
+      display: none;
+    }
+
+    &.show {
+      width: 100%;
+      max-width: 100%;
+
+      .bar:nth-child(1) {
+        transform: rotate(-45deg) scaleX(1.5) translate(-3px, 5px);
+      }
+
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .bar:nth-child(3) {
+        transform: rotate(45deg) scaleX(1.5) translate(-3px, -5px);
+      }
+    }
+
+    &-vertical {
+      display: none;
     }
   }
 }
