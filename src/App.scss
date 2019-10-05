@@ -309,7 +309,8 @@
     &-toggle {
       top: 17px;
       right: 17px;
-      border: none;
+      border: 0;
+      background-color: transparent;
     }
 
     .site-select {
