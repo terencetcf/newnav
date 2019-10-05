@@ -1,7 +1,7 @@
 .sidenav {
   background-color: #526061;
   color: #fff;
-  width: 50px;
+  width: 25px;
   transition: all 0.1s;
   position: relative;
   padding-right: 0;
@@ -18,15 +18,28 @@
   &.show {
     width: 270px;
     max-width: 270px;
+
+    .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 5px);
+    }
+
+    .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -5px);
+    }
   }
 
   &-toggle {
     position: absolute;
     top: 5px;
-    right: -15px;
+    right: -18px;
     background-color: #4cbe82;
-    border: solid 4px #4cbe82;
+    border: solid 3px #4cbe82;
     border-radius: 0.25rem;
+    cursor: pointer;
 
     button {
       display: inline-block;
@@ -35,11 +48,19 @@
       vertical-align: middle;
       user-select: none;
       border: 1px solid transparent;
-      padding: 0.2rem 0.75rem;
       border-radius: 0.25rem;
       background-color: #004431;
       line-height: 1.75;
       cursor: pointer;
+    }
+
+    .bar {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #fff;
+      margin: 5px 0;
+      transition: 0.4s;
     }
   }
 
@@ -56,9 +77,11 @@
     text-transform: uppercase;
     font-weight: bold;
     width: 100%;
-    padding-top: 100px;
-    padding-left: 5px;
+    padding-top: 60px;
+    padding-left: 12px;
     color: #024231;
+    letter-spacing: 0.1rem;
+    font-size: 0.85rem;
 
     .show & {
       display: none;
@@ -80,15 +103,14 @@
 
         &::after {
           content: "";
-          background: #006a4c;
-          display: block;
-          height: 30px;
-          width: 30px;
+          width: 0;
+          height: 0;
+          border-top: 22px solid transparent;
+          border-left: 15px solid #006a4c;
+          border-bottom: 22px solid transparent;
           position: absolute;
-          top: 5px;
-          right: -10px;
-          z-index: 4;
-          transform: rotate(-45deg);
+          top: 0;
+          right: -15px;
         }
       }
 
@@ -107,26 +129,75 @@
 
     li ul {
       padding-left: 0;
+      display: none;
 
       a {
         background-color: #a9b3b5;
         color: #000;
+        font-size: 0.9rem;
         text-transform: none;
+        padding-left: 15px;
 
-        &:hover {
+        &:not(.active):hover {
           background-color: #979fa2;
           color: #000;
         }
       }
     }
 
-    .tag {
-      color: #fff;
-      background-color: #df1f1c;
-      border-radius: 0.25rem;
-      padding: 2px 4px;
+    li.show {
+      > a {
+        background-color: #394344;
+      }
+
+      ul {
+        display: block;
+
+        a.active {
+          color: #fff;
+
+          &::after {
+            border-top-width: 20px;
+            border-bottom-width: 20px;
+          }
+        }
+      }
+    }
+
+    a#{&}-toggle::after {
+      content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><path fill='white' d='M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z'></path></svg>");
       position: absolute;
-      right: 50px;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      right: 20px;
+      transform: translate(0, -50%);
+      transition: all 0.1s;
+    }
+
+    li.show a#{&}-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .badge {
+      color: #fff;
+      background-color: #e43d3f;
+      border-radius: 50%;
+      position: absolute;
+      right: 45px;
+      font-size: 0.8rem;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    li ul .badge {
+      right: 15px;
+      height: unset;
+      width: unset;
+      padding: 4px 8px;
+      border-radius: 0.25rem;
     }
   }
 }
@@ -150,13 +221,13 @@
     white-space: nowrap;
     width: 100%;
     font-weight: 700;
-    color: #195c4b;
+    color: #2c6d5c;
     text-align: left;
     vertical-align: middle;
     background-color: #fff;
     border: 1px solid #fff;
     padding: 0.3rem 0.75rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.25;
     border-radius: 0.25rem;
     user-select: none;

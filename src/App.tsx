@@ -1,7 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 
 const App: React.FC = () => {
+  const [sideNavStatus, setSideNavStatus] = useState("show");
+  const [dropDownStatus, setDropDownStatus] = useState("");
+  const [selectedSite, setSelectedSite] = useState("1");
+  const [menuStatus, setMenuStatus] = useState("");
+
+  const sites = [
+    { id: "1", name: "Allen, Dallas" },
+    { id: "2", name: "Apple, California" },
+    { id: "3", name: "CBRE, London" },
+    { id: "4", name: "Amazon, New York" },
+    { id: "5", name: "Allen, Dallas" },
+    { id: "6", name: "Apple, California" },
+    { id: "7", name: "CBRE, London" },
+    { id: "8", name: "Amazon, New York" },
+    { id: "9", name: "Allen, Dallas" },
+    { id: "10", name: "Apple, California" },
+    { id: "11", name: "CBRE, London" },
+    { id: "12", name: "Amazon, New York" },
+    { id: "13", name: "Allen, Dallas" },
+    { id: "14", name: "Apple, California" },
+    { id: "15", name: "CBRE, London" },
+    { id: "16", name: "Amazon, New York" }
+  ];
+
+  const getSiteName = () => {
+    const site = sites.find(site => site.id === selectedSite);
+    return site ? <>{site.name}</> : null;
+  };
+
+  const onSideNavClick = () => {
+    setSideNavStatus(sideNavStatus === "show" ? "" : "show");
+  };
+
+  const onDropDownClick = () => {
+    setDropDownStatus(dropDownStatus === "show" ? "" : "show");
+  };
+
+  const onDropDownBlur = (e: any) => {
+    if (!e.currentTarget.parentNode.contains(e.relatedTarget)) {
+      setDropDownStatus("");
+    }
+  };
+
+  const onDropDownItemClick = (
+    siteId: string,
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    setSelectedSite(siteId);
+    setDropDownStatus("");
+    e.preventDefault();
+  };
+
+  const onMenuClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    setMenuStatus(menuStatus === "show" ? "" : "show");
+    e.preventDefault();
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -13,81 +70,40 @@ const App: React.FC = () => {
         </div>
       </nav>
       <div className="content">
-        <div className="sidenav show">
-          <div className="sidenav-toggle">
-            <button>-</button>
+        <div className={"sidenav " + sideNavStatus}>
+          <div className="sidenav-toggle" onClick={onSideNavClick}>
+            <button>
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
           </div>
           <div className="sidenav-content">
             <div className="site-select">
-              <div className="dropdown">
-                <button className="dropdown-toggle">Allen, Dallas</button>
+              <div className={"dropdown " + dropDownStatus}>
+                <button
+                  className="dropdown-toggle"
+                  onClick={onDropDownClick}
+                  onBlur={onDropDownBlur}
+                >
+                  {getSiteName()}
+                </button>
                 <div className="dropdown-menu">
-                  <a href="#" className="dropdown-item active">
-                    Allen, Dallas
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Apple, California
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    CBRE, London
-                  </a>
-                  <a href="#" className="dropdown-item">
-                    Amazon, New York
-                  </a>
+                  {sites.map(site => {
+                    return (
+                      <a
+                        href="#"
+                        key={site.id}
+                        className={
+                          "dropdown-item " +
+                          (site.id === selectedSite ? "active" : "")
+                        }
+                        onClick={event => onDropDownItemClick(site.id, event)}
+                      >
+                        {site.name}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -98,14 +114,19 @@ const App: React.FC = () => {
                     Dashboard
                   </a>
                 </li>
-                <li>
-                  <a href="#" className="sidenav-menu-toggle">
+                <li className={menuStatus}>
+                  <a
+                    href="#"
+                    className="sidenav-menu-toggle"
+                    onClick={onMenuClick}
+                  >
                     Risks
+                    <span className="badge"></span>
                   </a>
                   <ul>
                     <li>
-                      <a href="#">
-                        Risk Register <span className="tag">3</span>
+                      <a href="#" className="active">
+                        Risk Register <span className="badge">3</span>
                       </a>
                     </li>
                     <li>
@@ -123,7 +144,7 @@ const App: React.FC = () => {
           </div>
           <div className="sidenav-vertical">Allen, Dallas</div>
         </div>
-        <div className="main"></div>
+        <div className="main">s</div>
       </div>
     </>
   );
